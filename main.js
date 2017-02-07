@@ -4,22 +4,26 @@ function notes(state = [], action) {
     }
     switch (action.type) {
         case "INIT" :
-        console.log(action);
-            return action.firebase
+            console.log(action);
+            return (action.firebase ? action.firebase : []);
         case 'POST':
 
-           firebase.database().ref('notes').set([...state,{
+           firebase.database().ref('/').set([...state,{
               text: action.text,
               folder: action.folder,
               date: new Date().toLocaleDateString()
             }]);
+            console.log(action);
+            var model = {
+                date: new Date().toLocaleDateString(),
+                text: action.text,
+                folder: action.folder
+            };
+            console.log(model);
 
             return [
-                ...state, {
-                    date: new Date().toLocaleDateString(),
-                    text: action.text,
-                    folder: action.folder
-                }
+                ...state,
+                model
             ];
         case 'DELETE':
             return ""
@@ -160,7 +164,7 @@ var config = {
 firebase.initializeApp(config);
 var database = firebase.database();
 
-database.ref('/notes/').once('value').then(function(snapshot) {
+database.ref('/').once('value').then(function(snapshot) {
   store.dispatch({
       type: 'INIT',
       firebase: snapshot.val()
@@ -174,10 +178,3 @@ database.ref('/notes/').once('value').then(function(snapshot) {
 //       firebase: snapshot.val()
 //   });
 // });
-
-function addTofirebase() {
-  // firebase.database().ref('notes').set([...notes,{
-  //     text: "add",
-  //     folder: "firebases"
-  //   }]);
-}

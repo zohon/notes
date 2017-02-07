@@ -12,20 +12,23 @@ function notes() {
     switch (action.type) {
         case "INIT":
             console.log(action);
-            return action.firebase;
+            return action.firebase ? action.firebase : [];
         case 'POST':
 
-            firebase.database().ref('notes').set([].concat(_toConsumableArray(state), [{
+            firebase.database().ref('/').set([].concat(_toConsumableArray(state), [{
                 text: action.text,
                 folder: action.folder,
                 date: new Date().toLocaleDateString()
             }]));
-
-            return [].concat(_toConsumableArray(state), [{
+            console.log(action);
+            var model = {
                 date: new Date().toLocaleDateString(),
                 text: action.text,
                 folder: action.folder
-            }]);
+            };
+            console.log(model);
+
+            return [].concat(_toConsumableArray(state), [model]);
         case 'DELETE':
             return "";
         default:
@@ -169,7 +172,7 @@ var config = {
 firebase.initializeApp(config);
 var database = firebase.database();
 
-database.ref('/notes/').once('value').then(function (snapshot) {
+database.ref('/').once('value').then(function (snapshot) {
     store.dispatch({
         type: 'INIT',
         firebase: snapshot.val()
@@ -183,10 +186,3 @@ database.ref('/notes/').once('value').then(function (snapshot) {
 //       firebase: snapshot.val()
 //   });
 // });
-
-function addTofirebase() {
-    // firebase.database().ref('notes').set([...notes,{
-    //     text: "add",
-    //     folder: "firebases"
-    //   }]);
-}
