@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Redux basic example</title>
+    <script src="https://www.gstatic.com/firebasejs/3.6.8/firebase.js"></script>
+    
+    <script src="https://unpkg.com/redux@latest/dist/redux.min.js"></script>
+    <script src="lodash.core.js"></script>
+
+
+
+
+    <style>
+
+    #theForm {
+      margin: 20px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    #listFolder {
+      list-style: none;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    #listFolder li{
+      border-bottom :1px solid #eee;
+      padding: 0 5px;
+      cursor: pointer;
+    }
+    </style>
+</head>
+
+<body>
+
+    <ol id="listFolder"></ol>
+
+    <form id="theForm">
+      <textarea placeholder="text" id="theFormText"></textarea>
+      <input type="folder"  placeholder="folder" id="theFormFolder"></input>
+      <button id="theFormSubmit" type="button">Create</button>
+    </form>
+
+    <div id="listInfo">
+        <div class="item">
+        </div>
+    </div>
+
+    <script src="build/main.bundle.js"></script>
+</body>
+
+</html>

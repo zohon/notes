@@ -1,0 +1,18 @@
+{
+  "name": "note",
+  "version": "0.0.1",
+  "description": "note",
+  "main": "index.html",
+  "scripts": {
+    "start": "npm run web",
+    "web": "browser-sync start --files \"*, build/* \" --server --port 8080",
+    "build": "babel --presets env main.js -o build/main.bundle.js"
+  },
+  "author": "edouard rabany",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-core": "^6.22.1",
+    "babel-preset-env": "^1.1.8"
+  }
+}
